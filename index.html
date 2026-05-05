@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CV Pro Khmer — សេវាកម្ម CV វិជ្ជាជីវៈ</title>
+<link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Kantumruy+Pro:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --gold:#c8a84b;--gold2:#e6c76a;--dark:#0d1b2a;--dark2:#12243a;--dark3:#1e3a55;
+  --text:#fff;--muted:#a0b4c8;--subtle:#5d8aaa;
+  --radius:10px;--transition:all .25s ease;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Kantumruy Pro',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;}
+
+/* ===== TOP BAR ===== */
+.topbar{background:var(--gold);padding:8px 24px;display:flex;justify-content:space-between;align-items:center;}
+.topbar span{font-size:12px;font-weight:700;color:var(--dark);letter-spacing:.8px;}
+
+/* ===== NAV ===== */
+nav{background:var(--dark);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--dark3);position:sticky;top:0;z-index:100;}
+.logo{font-family:'Battambang',serif;font-size:18px;font-weight:700;color:var(--gold);}
+.nav-links{display:flex;gap:24px;}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:var(--transition);}
+.nav-links a:hover{color:var(--gold);}
+.nav-btn{background:var(--gold);color:var(--dark);border:none;padding:8px 18px;border-radius:6px;font-family:'Battambang',serif;font-size:13px;font-weight:700;cursor:pointer;transition:var(--transition);}
+.nav-btn:hover{background:var(--gold2);}
+
+/* ===== HERO ===== */
+.hero{padding:48px 24px 40px;display:flex;gap:28px;align-items:flex-start;max-width:900px;margin:0 auto;border-bottom:2px solid var(--gold);}
+.hero-left{flex:1;}
+.brand-tag{background:var(--gold);color:var(--dark);font-size:11px;font-weight:700;padding:4px 14px;border-radius:3px;display:inline-block;margin-bottom:14px;letter-spacing:1.2px;}
+.hero-title{font-family:'Battambang',serif;font-size:36px;font-weight:700;line-height:1.2;margin-bottom:10px;}
+.hero-subtitle{font-size:14px;color:var(--gold);margin-bottom:12px;}
+.hero-desc{font-size:13px;color:var(--muted);line-height:1.8;max-width:480px;}
+.hero-right{width:210px;flex-shrink:0;background:var(--dark2);border:2px solid var(--gold);border-radius:var(--radius);padding:22px 16px;text-align:center;}
+.price-big{font-family:'Battambang',serif;font-size:42px;font-weight:700;color:var(--gold);line-height:1;}
+.price-lbl{font-size:12px;color:var(--muted);margin-top:4px;margin-bottom:12px;}
+.price-cta{background:var(--gold);color:var(--dark);font-family:'Battambang',serif;font-size:12px;font-weight:700;padding:8px;border-radius:6px;display:block;text-align:center;cursor:pointer;margin-bottom:8px;border:none;width:100%;transition:var(--transition);}
+.price-cta:hover{background:var(--gold2);}
+.price-note{font-size:11px;color:var(--subtle);border-top:1px solid var(--dark3);padding-top:8px;margin-top:4px;}
+
+/* ===== SECTION COMMON ===== */
+section{max-width:900px;margin:0 auto;padding:36px 24px 0;}
+.sec-title{font-family:'Battambang',serif;font-size:17px;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.sec-title::after{content:'';flex:1;height:1px;background:var(--dark3);}
+
+/* ===== CV TYPE CHOOSER ===== */
+.cv-chooser{background:var(--dark2);border:1px solid var(--dark3);border-radius:var(--radius);padding:24px;margin-bottom:0;}
+.chooser-label{font-size:14px;color:var(--muted);margin-bottom:16px;font-weight:600;}
+.cv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:20px;}
+.cv-card{background:var(--dark);border:2px solid var(--dark3);border-radius:var(--radius);padding:10px 8px 12px;cursor:pointer;transition:var(--transition);text-align:center;position:relative;overflow:hidden;}
+.cv-card:hover{border-color:var(--gold);transform:translateY(-2px);}
+.cv-card.selected{border-color:var(--gold);background:#1a2e1a;}
+.cv-card.selected::after{content:'✓';position:absolute;top:6px;right:8px;background:var(--gold);color:var(--dark);font-size:10px;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;line-height:18px;}
+.cv-thumb{width:100%;height:80px;border-radius:6px;margin-bottom:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.cv-name{font-size:12px;color:var(--muted);font-weight:600;}
+.cv-card.selected .cv-name{color:var(--gold);}
+
+/* Thumb SVG previews */
+.thumb-dark{background:#0d1b2a;border:1px solid #c8a84b33;}
+.thumb-white{background:#f5f5f5;}
+.thumb-gold{background:#f8f4ee;}
+.thumb-blue{background:#e8f0ff;}
+.thumb-rose{background:#fff0f3;}
+.thumb-green{background:#f0fff4;}
+
+/* ===== PACKAGE GRID ===== */
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:0;}
+.pkg-card{background:var(--dark2);border:1px solid var(--dark3);border-radius:var(--radius);padding:20px 16px;text-align:center;transition:var(--transition);cursor:pointer;}
+.pkg-card:hover{border-color:var(--gold);transform:translateY(-2px);}
+.pkg-card.featured{border:2px solid var(--gold);position:relative;}
+.popular-badge{background:var(--gold);color:var(--dark);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:10px;}
+.pkg-name{font-family:'Battambang',serif;font-size:15px;font-weight:700;margin-bottom:6px;}
+.pkg-price{font-size:28px;font-weight:700;color:var(--gold);margin-bottom:4px;}
+.pkg-pages{font-size:11px;color:var(--subtle);margin-bottom:12px;}
+.pkg-features{font-size:12px;color:var(--muted);line-height:1.9;text-align:left;}
+.pkg-features span{display:block;}
+.pkg-features span::before{content:"✓ ";color:var(--gold);}
+.pkg-btn{background:transparent;border:1px solid var(--dark3);color:var(--muted);width:100%;padding:8px;border-radius:6px;font-family:'Battambang',serif;font-size:13px;cursor:pointer;margin-top:14px;transition:var(--transition);}
+.pkg-card.featured .pkg-btn{background:var(--gold);color:var(--dark);border-color:var(--gold);}
+.pkg-btn:hover{background:var(--gold);color:var(--dark);border-color:var(--gold);}
+
+/* ===== WHY US ===== */
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.why-card{background:var(--dark2);border:1px solid var(--dark3);border-radius:var(--radius);padding:18px;}
+.why-icon{width:34px;height:34px;background:var(--dark3);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
+.why-title{font-family:'Battambang',serif;font-size:14px;font-weight:700;margin-bottom:5px;}
+.why-text{font-size:12px;color:var(--muted);line-height:1.7;}
+
+/* ===== ORDER FORM ===== */
+.order-section{background:var(--dark2);border:1px solid var(--dark3);border-radius:var(--radius);padding:24px;margin-top:0;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-group label{font-size:12px;color:var(--muted);font-weight:600;}
+.form-group input,.form-group textarea,.form-group select{background:var(--dark);border:1px solid var(--dark3);border-radius:6px;padding:10px 12px;font-size:13px;color:var(--text);font-family:'Kantumruy Pro',sans-serif;transition:var(--transition);outline:none;}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--gold);}
+.form-group textarea{resize:vertical;min-height:80px;}
+.form-group select option{background:var(--dark2);}
+.summary-box{background:var(--dark);border:1px solid var(--gold);border-radius:var(--radius);padding:14px;margin-bottom:16px;}
+.sum-row{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid var(--dark3);}
+.sum-row:last-child{border-bottom:none;font-weight:700;color:var(--gold);}
+.sum-label{color:var(--muted);}
+.submit-btn{background:var(--gold);color:var(--dark);border:none;width:100%;padding:14px;border-radius:8px;font-family:'Battambang',serif;font-size:16px;font-weight:700;cursor:pointer;transition:var(--transition);}
+.submit-btn:hover{background:var(--gold2);transform:translateY(-1px);}
+
+/* ===== CONTACT ===== */
+.contact-strip{background:#0a1520;padding:16px 24px;display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:40px;}
+.c-item{font-size:12px;color:var(--subtle);display:flex;align-items:center;gap:6px;}
+.c-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;flex-shrink:0;}
+
+/* ===== FOOTER ===== */
+.footer{background:var(--dark);border-top:1px solid var(--dark3);padding:20px 24px;text-align:center;}
+.footer-logo{font-family:'Battambang',serif;font-size:16px;color:var(--gold);margin-bottom:6px;}
+.footer-text{font-size:12px;color:var(--subtle);}
+
+/* ===== MODAL ===== */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.active{display:flex;}
+.modal{background:var(--dark2);border:2px solid var(--gold);border-radius:14px;padding:28px;max-width:420px;width:100%;position:relative;}
+.modal-close{position:absolute;top:12px;right:14px;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;line-height:1;}
+.modal-title{font-family:'Battambang',serif;font-size:18px;color:var(--gold);margin-bottom:6px;}
+.modal-sub{font-size:13px;color:var(--muted);margin-bottom:18px;}
+.modal-cv-preview{background:var(--dark);border:1px solid var(--dark3);border-radius:8px;padding:14px;margin-bottom:16px;text-align:center;}
+.modal-actions{display:flex;gap:10px;}
+.modal-btn{flex:1;padding:10px;border-radius:6px;font-family:'Battambang',serif;font-size:13px;font-weight:700;cursor:pointer;transition:var(--transition);}
+.modal-btn.primary{background:var(--gold);color:var(--dark);border:none;}
+.modal-btn.secondary{background:transparent;color:var(--muted);border:1px solid var(--dark3);}
+.modal-btn:hover{opacity:.85;}
+
+/* ===== SUCCESS TOAST ===== */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--gold);color:var(--dark);padding:12px 20px;border-radius:8px;font-family:'Battambang',serif;font-size:14px;font-weight:700;z-index:300;transform:translateY(80px);opacity:0;transition:all .4s ease;}
+.toast.show{transform:translateY(0);opacity:1;}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:640px){
+  .hero{flex-direction:column;}
+  .hero-right{width:100%;}
+  .pkg-grid{grid-template-columns:1fr;}
+  .why-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .cv-grid{grid-template-columns:repeat(3,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span>សេវាកម្មCV វិជ្ជាជីវៈ · Professional CV Service</span>
+  <span>២៤/៧ · Fast Delivery</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">CV PRO KHMER</div>
+  <div class="nav-links">
+    <a href="#packages">កញ្ចប់</a>
+    <a href="#cv-type">ប្រភេទ CV</a>
+    <a href="#order">បញ្ជាទិញ</a>
+    <a href="#contact">ទំនាក់ទំនង</a>
+  </div>
+  <button class="nav-btn" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">បញ្ជាទិញឥឡូវ</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="brand-tag">CV PRO KHMER</div>
+    <h1 class="hero-title">បង្កើត CV<br>ដែលទទួលបានការងារ</h1>
+    <p class="hero-subtitle">Create a CV that gets you hired — fast, professional, affordable</p>
+    <p class="hero-desc">យើងផ្តល់សេវាបង្កើត CV លក្ខណៈវិជ្ជាជីវៈ ជាភាសាខ្មែរ ឬអង់គ្លេស សម្រាប់ការដាក់ពាក្យការងារ ឬបន្តការសិក្សា ។ ទទួលបាន CV ត្រឹមមួយថ្ងៃ!</p>
+  </div>
+  <div class="hero-right">
+    <div class="price-big">$3</div>
+    <div class="price-lbl">តម្លៃចាប់ផ្តើម / Starting from</div>
+    <button class="price-cta" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">ទទួលភ្លាម ២៤ ម៉ោង</button>
+    <div class="price-note">រូបភាព + ព័ត៌មាន ➜ CV ស្អាត</div>
+  </div>
+</div>
+
+<!-- CV TYPE SECTION -->
+<section id="cv-type" style="padding-top:36px;">
+  <div class="sec-title">ជ្រើសប្រភេទ CV · Choose CV Style</div>
+  <div class="cv-chooser">
+    <p class="chooser-label">ចុចជ្រើសរើសប្រភេទ CV ដែលអ្នកចង់បាន 👇</p>
+    <div class="cv-grid" id="cvGrid">
+
+      <!-- Classic Dark -->
+      <div class="cv-card selected" data-cv="Classic Dark" data-price="0" onclick="selectCV(this)">
+        <div class="cv-thumb thumb-dark">
+          <svg width="90" height="72" viewBox="0 0 90 72"><rect width="90" height="72" fill="#0d1b2a"/><rect width="28" height="72" fill="#12243a"/><circle cx="14" cy="16" r="7" fill="#1e3a55"/><rect x="6" y="28" width="16" height="2" rx="1" fill="#c8a84b"/><rect x="6" y="33" width="13" height="1.5" rx="1" fill="#1e3a55"/><rect x="6" y="37" width="15" height="1.5" rx="1" fill="#1e3a55"/><rect x="35" y="8" width="44" height="4" rx="1" fill="#c8a84b"/><rect x="35" y="15" width="34" height="2" rx="1" fill="#2a4a6a"/><rect x="35" y="20" width="44" height="1.5" rx="1" fill="#1e3a55"/><rect x="35" y="24" width="38" height="1.5" rx="1" fill="#1e3a55"/><rect x="35" y="32" width="24" height="3" rx="1" fill="#c8a84b"/><rect x="35" y="38" width="44" height="1.5" rx="1" fill="#1e3a55"/><rect x="35" y="42" width="30" height="1.5" rx="1" fill="#1e3a55"/><rect x="35" y="50" width="24" height="3" rx="1" fill="#c8a84b"/><rect x="35" y="56" width="44" height="1.5" rx="1" fill="#1e3a55"/><rect x="35" y="60" width="36" height="1.5" rx="1" fill="#1e3a55"/></svg>
+        </div>
+        <div class="cv-name">Classic Dark</div>
+      </div>
+
+      <!-- Modern White -->
+      <div class="cv-card" data-cv="Modern White" data-price="0" onclick="selectCV(this)">
+        <div class="cv-thumb thumb-white">
+          <svg width="90" height="72" viewBox="0 0 90 72"><rect width="90" height="72" fill="#fff"/><rect width="90" height="16" fill="#1a2744"/><rect x="6" y="5" width="30" height="4" rx="1" fill="#fff"/><rect x="6" y="10" width="44" height="2" rx="1" fill="#c8a84b"/><rect x="6" y="22" width="18" height="3" rx="1" fill="#1a2744"/><rect x="6" y="28" width="32" height="1.5" rx="1" fill="#ccc"/><rect x="6" y="32" width="26" height="1.5" rx="1" fill="#ccc"/><rect x="50" y="22" width="18" height="3" rx="1" fill="#1a2744"/><rect x="50" y="28" width="34" height="1.5" rx="1" fill="#ccc"/><rect x="50" y="32" width="28" height="1.5" rx="1" fill="#ccc"/><rect x="6" y="42" width="18" height="3" rx="1" fill="#1a2744"/><rect x="6" y="48" width="78" height="1.5" rx="1" fill="#ccc"/><rect x="6" y="52" width="60" height="1.5" rx="1" fill="#ccc"/><rect x="6" y="56" width="70" height="1.5" rx="1" fill="#ccc"/><rect x="6" y="62" width="50" height="1.5" rx="1" fill="#ccc"/></svg>
+        </div>
+        <div class="cv-name">Modern White</div>
+      </div>
+
+      <!-- Gold Premium -->
+      <div class="cv-card" data-cv="Gold Premium" data-price="0" onclick="selectCV(this)">
+        <div class="cv-thumb thumb-gold">
+          <svg width="90" height="72" viewBox="0 0 90 72"><rect width="90" height="72" fill="#f8f4ee"/><rect width="28" height="72" fill="#c8a84b"/><circle cx="14" cy="14" r="8" fill="#fff"/><rect x="6" y="28" width="16" height="2.5" rx="1" fill="#fff"/><rect x="6" y="34" width="13" height="1.5" rx="1" fill="#f5e8c8"/><rect x="6" y="38" width="15" height="1.5" rx="1" fill="#f5e8c8"/><rect x="6" y="42" width="12" height="1.5" rx="1" fill="#f5e8c8"/><rect x="34" y="8" width="48" height="4.5" rx="1" fill="#4a3000"/><rect x="34" y="16" width="34" height="2" rx="1" fill="#c8a84b"/><rect x="34" y="21" width="50" height="1.5" rx="1" fill="#999"/><rect x="34" y="26" width="40" height="1.5" rx="1" fill="#999"/><rect x="34" y="34" width="22" height="3" rx="1" fill="#4a3000"/><rect x="34" y="40" width="50" height="1.5" rx="1" fill="#999"/><rect x="34" y="44" width="36" height="1.5" rx="1" fill="#999"/><rect x="34" y="52" width="22" height="3" rx="1" fill="#4a3000"/><rect x="34" y="58" width="50" height="1.5" rx="1" fill="#999"/><rect x="34" y="62" width="30" height="1.5" rx="1" fill="#999"/></svg>
+        </div>
+        <div class="cv-name">Gold Premium</div>
+      </div>
+
+      <!-- Sky Blue -->
+      <div class="cv-card" data-cv="Sky Blue" data-price="0" onclick="selectCV(this)">
+        <div class="cv-thumb thumb-blue">
+          <svg width="90" height="72" viewBox="0 0 90 72"><rect width="90" height="72" fill="#fff"/><rect width="90" height="22" fill="#e8f0ff"/><circle cx="14" cy="12" r="7" fill="#1a2744"/><rect x="26" y="7" width="26" height="3.5" rx="1" fill="#1a2744"/><rect x="26" y="14" width="38" height="2" rx="1" fill="#4e9af1"/><rect x="6" y="30" width="18" height="3" rx="1" fill="#1a2744"/><rect x="6" y="36" width="32" height="1.5" rx="1" fill="#ccc"/><rect x="6" y="40" width="28" height="1.5" rx="1" fill="#ccc"/><rect x="50" y="30" width="18" height="3" rx="1" fill="#1a2744"/><rect x="50" y="36" width="34" height="1.5" rx="1" fill="#ccc"/><rect x="50" y="40" width="26" height="1.5" rx="1" fill="#ccc"/><rect x="6" y="50" width="18" height="3" rx="1" fill="#1a2744"/><rect x="6" y="56" width="78" height="1.5" rx="1" fill="#ccc"/><rect x="6" y="60" width="60" height="1.5" rx="1" fill="#ccc"/></svg>
+        </div>
+        <div class="cv-name">Sky Blue</div>
+      </div>
+
+      <!-- Rose Elegance -->
+      <div class="cv-card" data-cv="Rose Elegance" data-price="0" onclick="selectCV(this)">
+        <div class="cv-thumb thumb-rose">
+          <svg width="90" height="72" viewBox="0 0 90 72"><rect width="90" height="72" fill="#fff"/><rect width="90" height="18" fill="#f4c0d1"/><rect x="6" y="5" width="28" height="3.5" rx="1" fill="#72243e"/><rect x="6" y="12" width="42" height="2" rx="1" fill="#993556"/><rect x="6" y="24" width="18" height="3" rx="1" fill="#993556"/><rect x="6" y="30" width="78" height="1.5" rx="1" fill="#ddd"/><rect x="6" y="34" width="60" height="1.5" rx="1" fill="#ddd"/><rect x="6" y="42" width="18" height="3" rx="1" fill="#993556"/><rect x="6" y="48" width="78" height="1.5" rx="1" fill="#ddd"/><rect x="6" y="52" width="50" height="1.5" rx="1" fill="#ddd"/><rect x="6" y="60" width="18" height="3" rx="1" fill="#993556"/><rect x="6" y="66" width="78" height="1.5" rx="1" fill="#ddd"/></svg>
+        </div>
+        <div class="cv-name">Rose Elegance</div>
+      </div>
+
+      <!-- Minimal Green -->
+      <div class="cv-card" data-cv="Minimal Green" data-price="0" onclick="selectCV(this)">
+        <div class="cv-thumb thumb-green">
+          <svg width="90" height="72" viewBox="0 0 90 72"><rect width="90" height="72" fill="#f0fff4"/><rect x="0" y="0" width="8" height="72" fill="#1a7a4a"/><rect x="14" y="6" width="36" height="4.5" rx="1" fill="#1a7a4a"/><rect x="14" y="14" width="56" height="2" rx="1" fill="#5cb85c"/><rect x="14" y="20" width="42" height="1.5" rx="1" fill="#aaa"/><rect x="14" y="28" width="20" height="3" rx="1" fill="#1a7a4a"/><rect x="14" y="34" width="68" height="1.5" rx="1" fill="#ccc"/><rect x="14" y="38" width="56" height="1.5" rx="1" fill="#ccc"/><rect x="14" y="46" width="20" height="3" rx="1" fill="#1a7a4a"/><rect x="14" y="52" width="68" height="1.5" rx="1" fill="#ccc"/><rect x="14" y="56" width="50" height="1.5" rx="1" fill="#ccc"/><rect x="14" y="62" width="60" height="1.5" rx="1" fill="#ccc"/></svg>
+        </div>
+        <div class="cv-name">Minimal Green</div>
+      </div>
+
+      <!-- Executive Dark -->
+      <div class="cv-card" data-cv="Executive Dark" data-price="2" onclick="selectCV(this)">
+        <div class="cv-thumb" style="background:#111;">
+          <svg width="90" height="72" viewBox="0 0 90 72"><rect width="90" height="72" fill="#111"/><rect x="0" y="0" width="90" height="4" fill="#c8a84b"/><rect x="6" y="10" width="78" height="5" rx="1" fill="#c8a84b" opacity=".2"/><rect x="6" y="10" width="36" height="5" rx="1" fill="#c8a84b"/><circle cx="72" cy="18" r="9" fill="#222"/><rect x="6" y="24" width="58" height="2" rx="1" fill="#555"/><rect x="6" y="32" width="20" height="3" rx="1" fill="#c8a84b"/><rect x="6" y="38" width="78" height="1.5" rx="1" fill="#444"/><rect x="6" y="42" width="60" height="1.5" rx="1" fill="#444"/><rect x="6" y="50" width="20" height="3" rx="1" fill="#c8a84b"/><rect x="6" y="56" width="78" height="1.5" rx="1" fill="#444"/><rect x="6" y="60" width="50" height="1.5" rx="1" fill="#444"/><rect x="6" y="66" width="68" height="1.5" rx="1" fill="#444"/></svg>
+        </div>
+        <div class="cv-name">Executive Dark</div>
+      </div>
+
+      <!-- Purple Pro -->
+      <div class="cv-card" data-cv="Purple Pro" data-price="0" onclick="selectCV(this)">
+        <div class="cv-thumb" style="background:#f8f0ff;">
+          <svg width="90" height="72" viewBox="0 0 90 72"><rect width="90" height="72" fill="#f8f0ff"/><rect width="28" height="72" fill="#6a0dad"/><circle cx="14" cy="14" r="8" fill="#fff"/><rect x="6" y="28" width="16" height="2" rx="1" fill="#fff"/><rect x="6" y="32" width="13" height="1.5" rx="1" fill="#d0a0ff"/><rect x="6" y="36" width="15" height="1.5" rx="1" fill="#d0a0ff"/><rect x="34" y="8" width="46" height="4" rx="1" fill="#6a0dad"/><rect x="34" y="16" width="34" height="2" rx="1" fill="#9b59b6"/><rect x="34" y="22" width="48" height="1.5" rx="1" fill="#ccc"/><rect x="34" y="30" width="22" height="3" rx="1" fill="#6a0dad"/><rect x="34" y="36" width="48" height="1.5" rx="1" fill="#ccc"/><rect x="34" y="40" width="36" height="1.5" rx="1" fill="#ccc"/><rect x="34" y="48" width="22" height="3" rx="1" fill="#6a0dad"/><rect x="34" y="54" width="48" height="1.5" rx="1" fill="#ccc"/><rect x="34" y="58" width="30" height="1.5" rx="1" fill="#ccc"/></svg>
+        </div>
+        <div class="cv-name">Purple Pro</div>
+      </div>
+
+      <!-- Two-Column Modern -->
+      <div class="cv-card" data-cv="Two-Column" data-price="0" onclick="selectCV(this)">
+        <div class="cv-thumb" style="background:#fafafa;">
+          <svg width="90" height="72" viewBox="0 0 90 72"><rect width="90" height="72" fill="#fafafa"/><rect width="90" height="12" fill="#2c3e50"/><rect x="5" y="3" width="22" height="3" rx="1" fill="#fff"/><rect x="30" y="3" width="40" height="1.5" rx="1" fill="#aaa"/><rect x="5" y="16" width="32" height="52" rx="2" fill="#ecf0f1"/><rect x="8" y="20" width="10" height="10" rx="5" fill="#2c3e50"/><rect x="8" y="34" width="26" height="2" rx="1" fill="#2c3e50"/><rect x="8" y="39" width="22" height="1.5" rx="1" fill="#999"/><rect x="8" y="43" width="24" height="1.5" rx="1" fill="#999"/><rect x="8" y="51" width="26" height="2" rx="1" fill="#2c3e50"/><rect x="8" y="56" width="20" height="1.5" rx="1" fill="#999"/><rect x="8" y="60" width="22" height="1.5" rx="1" fill="#999"/><rect x="42" y="16" width="43" height="52" rx="0" fill="#fff"/><rect x="44" y="20" width="22" height="3" rx="1" fill="#2c3e50"/><rect x="44" y="26" width="38" height="1.5" rx="1" fill="#ccc"/><rect x="44" y="30" width="32" height="1.5" rx="1" fill="#ccc"/><rect x="44" y="38" width="22" height="2.5" rx="1" fill="#2c3e50"/><rect x="44" y="43" width="38" height="1.5" rx="1" fill="#ccc"/><rect x="44" y="47" width="30" height="1.5" rx="1" fill="#ccc"/><rect x="44" y="55" width="22" height="2.5" rx="1" fill="#2c3e50"/><rect x="44" y="60" width="38" height="1.5" rx="1" fill="#ccc"/><rect x="44" y="64" width="28" height="1.5" rx="1" fill="#ccc"/></svg>
+        </div>
+        <div class="cv-name">Two-Column</div>
+      </div>
+
+    </div>
+
+    <!-- Selected Preview -->
+    <div id="selectedInfo" style="background:var(--dark);border:1px solid var(--gold);border-radius:8px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <span style="font-size:12px;color:var(--subtle);">បានជ្រើស:</span>
+        <span id="selectedName" style="font-weight:700;color:var(--gold);margin-left:8px;font-family:'Battambang',serif;">Classic Dark</span>
+      </div>
+      <button onclick="openModal()" style="background:var(--gold);color:var(--dark);border:none;padding:6px 16px;border-radius:6px;font-family:'Battambang',serif;font-size:12px;font-weight:700;cursor:pointer;">មើលការបញ្ជាទិញ →</button>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages" style="padding-top:36px;">
+  <div class="sec-title">កញ្ចប់សេវាកម្ម · Packages</div>
+  <div class="pkg-grid">
+    <div class="pkg-card" onclick="selectPkg(this,'Basic','3')">
+      <div class="pkg-name">មូលដ្ឋាន</div>
+      <div class="pkg-price">$3</div>
+      <div class="pkg-pages">1 ទំព័រ · 1 Page</div>
+      <div class="pkg-features">
+        <span>CV 1 ទំព័រ</span>
+        <span>ទម្រង់ស្តង់ដារ</span>
+        <span>ភាសាខ្មែរ/អង់គ្លេស</span>
+        <span>PDF + Word</span>
+      </div>
+      <button class="pkg-btn">ជ្រើសរើស</button>
+    </div>
+    <div class="pkg-card featured" onclick="selectPkg(this,'Standard','5')">
+      <div class="popular-badge">ពេញនិយម</div>
+      <div class="pkg-name">ស្តង់ដារ</div>
+      <div class="pkg-price">$5</div>
+      <div class="pkg-pages">1–2 ទំព័រ · 1–2 Pages</div>
+      <div class="pkg-features">
+        <span>CV រចនាប័ទ្មទំនើប</span>
+        <span>រូបថតដាក់បញ្ចូល</span>
+        <span>ពណ៌ & Layout ស្អាត</span>
+        <span>កែ 2 ដង</span>
+        <span>PDF + Word</span>
+      </div>
+      <button class="pkg-btn">ជ្រើសរើស</button>
+    </div>
+    <div class="pkg-card" onclick="selectPkg(this,'Premium','10')">
+      <div class="pkg-name">ព្រីមៀម</div>
+      <div class="pkg-price">$10</div>
+      <div class="pkg-pages">ដល់ 3 ទំព័រ · Up to 3 Pages</div>
+      <div class="pkg-features">
+        <span>CV ប្រណីតបំផុត</span>
+        <span>លិខិតដាក់ពាក្យ</span>
+        <span>LinkedIn Profile</span>
+        <span>កែគ្មានដែន</span>
+        <span>ឯកជន & លឿន</span>
+      </div>
+      <button class="pkg-btn">ជ្រើសរើស</button>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section style="padding-top:36px;">
+  <div class="sec-title">មូលហេតុដែលត្រូវជ្រើសរើសយើង · Why us</div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#c8a84b" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#c8a84b" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="why-title">គុណភាពខ្ពស់</div>
+      <div class="why-text">រចនាដោយអ្នកជំនាញ ត្រូវបានដោះស្រាយដោយការយកចិត្តទុកដាក់ខ្ពស់</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="#c8a84b" stroke-width="1.2"/><path d="M8 5v3l2 2" stroke="#c8a84b" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="why-title">ចែកជូនលឿន</div>
+      <div class="why-text">ទទួលបាន CV ក្នុងរយៈពេល ២៤ ម៉ោង ឬ ២ ម៉ោង (rush)</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8c0-2.76 2.24-5 5-5s5 2.24 5 5-2.24 5-5 5-5-2.24-5-5z" stroke="#c8a84b" stroke-width="1.2"/><path d="M6 10c.5.7 1.2 1 2 1s1.5-.3 2-1" stroke="#c8a84b" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="why-title">ការពេញចិត្ត ១០០%</div>
+      <div class="why-text">យើងធ្វើការកែប្រែ រហូតទាល់តែអ្នកពេញចិត្ត</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4h8M4 8h6M4 12h4" stroke="#c8a84b" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="why-title">ទម្រង់ច្រើន</div>
+      <div class="why-text">ទម្រង់ CV ជាង ២០ ប្រភេទ ជ្រើសរើសតាមចំណូលចិត្ត</div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER FORM -->
+<section id="order" style="padding-top:36px;padding-bottom:40px;">
+  <div class="sec-title">បញ្ជាទិញ · Place Your Order</div>
+  <div class="order-section">
+    <div class="summary-box">
+      <div class="sum-row"><span class="sum-label">ប្រភេទ CV</span><span id="sum-cv">Classic Dark</span></div>
+      <div class="sum-row"><span class="sum-label">កញ្ចប់</span><span id="sum-pkg">Standard</span></div>
+      <div class="sum-row"><span class="sum-label">ការដឹកជញ្ជូន</span><span id="sum-delivery">24 ម៉ោង ធម្មតា</span></div>
+      <div class="sum-row"><span class="sum-label">តម្លៃសរុប</span><span id="sum-total">$5</span></div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>ឈ្មោះពេញ / Full Name *</label>
+        <input type="text" id="f-name" placeholder="ឧ. Kong Sreyvin"/>
+      </div>
+      <div class="form-group">
+        <label>លេខទូរស័ព្ទ / Phone *</label>
+        <input type="tel" id="f-phone" placeholder="+855 XX XXX XXXX"/>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>ប្រភេទ CV / CV Style</label>
+        <select id="f-cvtype" onchange="updateSummaryCV(this.value)">
+          <option>Classic Dark</option>
+          <option>Modern White</option>
+          <option>Gold Premium</option>
+          <option>Sky Blue</option>
+          <option>Rose Elegance</option>
+          <option>Minimal Green</option>
+          <option>Executive Dark</option>
+          <option>Purple Pro</option>
+          <option>Two-Column</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>ភាសា / Language</label>
+        <select id="f-lang">
+          <option>ខ្មែរ (Khmer)</option>
+          <option>អង់គ្លេស (English)</option>
+          <option>ខ្មែរ + អង់គ្លេស (Both)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>កញ្ចប់ / Package</label>
+        <select id="f-pkg" onchange="updateSummaryPkg(this.value)">
+          <option value="3">មូលដ្ឋាន — $3</option>
+          <option value="5" selected>ស្តង់ដារ — $5</option>
+          <option value="10">ព្រីមៀម — $10</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>ការដឹកជញ្ជូន / Delivery</label>
+        <select id="f-delivery" onchange="updateDelivery(this.value)">
+          <option value="0">24 ម៉ោង ធម្មតា (ឥតគិតថ្លៃ)</option>
+          <option value="2">2 ម៉ោង Rush (+$2)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group" style="margin-bottom:14px;">
+      <label>ព័ត៌មានបន្ថែម / Additional Info</label>
+      <textarea id="f-info" placeholder="ដាក់ Link Facebook / Telegram ឬ ពណ៌នាអំពីការងារដែលអ្នកចង់ដាក់ CV..."></textarea>
+    </div>
+
+    <div class="form-group" style="margin-bottom:16px;">
+      <label>ទំនាក់ទំនង / Contact Channel</label>
+      <select id="f-contact">
+        <option>Telegram</option>
+        <option>Facebook Messenger</option>
+        <option>WhatsApp</option>
+        <option>Email</option>
+      </select>
+    </div>
+
+    <button class="submit-btn" onclick="submitOrder()">បញ្ជាទិញឥឡូវ — <span id="btn-price">$5</span> →</button>
+  </div>
+</section>
+
+<!-- CONTACT STRIP -->
+<div class="contact-strip" id="contact">
+  <div class="c-item"><div class="c-dot"></div>Telegram: @CVProKhmer</div>
+  <div class="c-item"><div class="c-dot"></div>Facebook: CV Pro Khmer</div>
+  <div class="c-item"><div class="c-dot"></div>TikTok: @cvprokhmer</div>
+  <div class="c-item"><div class="c-dot"></div>+855 XX XXX XXXX</div>
+</div>
+
+<div class="footer">
+  <div class="footer-logo">CV PRO KHMER</div>
+  <div class="footer-text">© 2025 CV Pro Khmer · Professional CV Service · Phnom Penh, Cambodia</div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-title">បញ្ជាក់ការបញ្ជាទិញ</div>
+    <div class="modal-sub">សូមពិនិត្យព័ត៌មានមុននឹងបញ្ជូន</div>
+    <div class="modal-cv-preview" id="modal-preview">
+      <div style="font-size:13px;color:var(--muted);">ប្រភេទ CV: <strong style="color:var(--gold)" id="modal-cv-name">Classic Dark</strong></div>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn secondary" onclick="closeModal()">ត្រឡប់</button>
+      <button class="modal-btn primary" onclick="confirmOrder()">បញ្ជាក់ → ទូទាត់</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✓ បានបញ្ជូនការបញ្ជាទិញ! យើងនឹងទំនាក់ទំនងក្នុង 24 ម៉ោង</div>
+
+<script>
+let selectedCV = 'Classic Dark';
+let basePkg = 5;
+let rushFee = 0;
+
+function selectCV(el){
+  document.querySelectorAll('.cv-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedCV = el.dataset.cv;
+  document.getElementById('selectedName').textContent = selectedCV;
+  document.getElementById('sum-cv').textContent = selectedCV;
+  document.getElementById('f-cvtype').value = selectedCV;
+  updateTotal();
+}
+
+function selectPkg(el, name, price){
+  document.querySelectorAll('.pkg-card').forEach(c=>c.classList.remove('featured'));
+  el.classList.add('featured');
+  basePkg = parseInt(price);
+  document.getElementById('f-pkg').value = price;
+  document.getElementById('sum-pkg').textContent = name + ' ($' + price + ')';
+  updateTotal();
+  document.getElementById('order').scrollIntoView({behavior:'smooth'});
+}
+
+function updateSummaryCV(val){
+  selectedCV = val;
+  document.getElementById('sum-cv').textContent = val;
+  document.getElementById('selectedName').textContent = val;
+  document.querySelectorAll('.cv-card').forEach(c=>{
+    c.classList.toggle('selected', c.dataset.cv === val);
+  });
+}
+
+function updateSummaryPkg(val){
+  basePkg = parseInt(val);
+  const names = {'3':'Basic','5':'Standard','10':'Premium'};
+  document.getElementById('sum-pkg').textContent = (names[val]||'Standard') + ' ($'+val+')';
+  updateTotal();
+}
+
+function updateDelivery(val){
+  rushFee = parseInt(val);
+  document.getElementById('sum-delivery').textContent = val === '2' ? '2 ម៉ោង Rush (+$2)' : '24 ម៉ោង ធម្មតា';
+  updateTotal();
+}
+
+function updateTotal(){
+  const total = basePkg + rushFee;
+  document.getElementById('sum-total').textContent = '$' + total;
+  document.getElementById('btn-price').textContent = '$' + total;
+}
+
+function openModal(){
+  document.getElementById('modal-cv-name').textContent = selectedCV;
+  document.getElementById('modal').classList.add('active');
+}
+
+function closeModal(){
+  document.getElementById('modal').classList.remove('active');
+}
+
+function submitOrder(){
+  const name = document.getElementById('f-name').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  if(!name){alert('សូមបំពេញឈ្មោះ!');return;}
+  if(!phone){alert('សូមបំពេញលេខទូរស័ព្ទ!');return;}
+  openModal();
+}
+
+function confirmOrder(){
+  closeModal();
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'), 4000);
+}
+
+// Sync selects with cards on page load
+document.addEventListener('DOMContentLoaded', ()=>{
+  updateTotal();
+});
+</script>
+</body>
+</html>
